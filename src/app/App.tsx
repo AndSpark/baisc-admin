@@ -1,6 +1,7 @@
 import { NConfigProvider } from 'naive-ui'
 import { RouterView } from 'vue-router'
 import { Component, VueComponent } from 'vue3-oop'
+import NaiveProvider from './components/layout/naive-provider'
 import AuthService from './core/authentication/auth.service'
 import { HttpService } from './core/http/http'
 import RouterStart from './core/router'
@@ -14,7 +15,9 @@ export default class App extends VueComponent {
 	render() {
 		return (
 			<NConfigProvider>
-				<RouterView></RouterView>
+				<NaiveProvider>
+					<RouterView></RouterView>
+				</NaiveProvider>
 			</NConfigProvider>
 		)
 	}

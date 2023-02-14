@@ -1,28 +1,27 @@
-import AuthService from '@/app/core/authentication/auth.service'
+import LoginService from '@/app/modules/login/login.service'
 import { NButton, NForm, NFormItem, NInput } from 'naive-ui'
-import { Component, injectService, Mut, VueComponent } from 'vue3-oop'
+import { Component, Link, VueComponent } from 'vue3-oop'
 
 @Component()
 export default class IndexPage extends VueComponent {
-	authService = injectService(AuthService)!
-
-	@Mut() loginForm = {
-		username: '',
-		password: '',
+	constructor(private loginService: LoginService) {
+		super()
 	}
 
 	render() {
 		return (
 			<div>
-				<NForm>
-					<NFormItem label='用户名'>
-						<NInput v-model:value={this.loginForm.username}></NInput>
-					</NFormItem>
-					<NFormItem label='密码'>
-						<NInput v-model:value={this.loginForm.password}></NInput>
-					</NFormItem>
-					<NButton onClick={() => this.authService.login(this.loginForm)}>登陆</NButton>
-				</NForm>
+				{this.loginService.NForm(
+					<>
+						<NFormItem label='用户名' path='username'>
+							<NInput v-model:value={this.loginService.form.username}></NInput>
+						</NFormItem>
+						<NFormItem label='密码' path='password'>
+							<NInput v-model:value={this.loginService.form.password}></NInput>
+						</NFormItem>
+						<NButton onClick={() => this.loginService.login()}>登陆</NButton>
+					</>
+				)}
 			</div>
 		)
 	}

@@ -4,6 +4,7 @@ import { resolveInstances } from '@/app/utils/injection'
 import { Injectable } from 'injection-js'
 import AuthService from '../authentication/auth.service'
 import { Subscription } from 'rxjs'
+import { nMessage } from '@/app/utils/naive'
 
 @Injectable()
 export class RouterService extends VueService {
@@ -33,6 +34,7 @@ export class RouterService extends VueService {
 		this.authChangeSubcrition = this.authService.change$.subscribe(user => {
 			if (user) {
 				this.router.push({ path: '/' })
+				nMessage()?.success('登陆成功')
 			} else {
 				this.router.push({ path: '/login' })
 			}

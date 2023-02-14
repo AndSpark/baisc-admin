@@ -1,4 +1,5 @@
 import AuthService from '@/app/core/authentication/auth.service'
+import { nMessage } from '@/app/utils/naive'
 import { Injectable } from 'injection-js'
 import type { RouteRecord } from 'vue-router'
 import { injectService } from 'vue3-oop'

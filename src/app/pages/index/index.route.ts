@@ -1,8 +1,9 @@
+import AbstractRoute from '@/app/core/router/abstract-route'
 import { Injectable } from 'injection-js'
 import type { RouteRecord } from 'vue-router'
 
 @Injectable()
-export default class IndexRoute implements Partial<RouteRecord> {
+export default class IndexRoute extends AbstractRoute {
 	path = '/'
 	component = () => import('./index.page')
 

@@ -1,10 +1,12 @@
-import { getCurrentApp, getCurrentInjector, Hook, injectService, VueService } from 'vue3-oop'
+import { getCurrentApp, Hook, injectService, VueService } from 'vue3-oop'
 import { createRouter, createWebHistory, Router } from 'vue-router'
 import { resolveInstances } from '@/app/utils/injection'
 import { Injectable } from 'injection-js'
 import AuthService from '../authentication/auth.service'
 import { Subscription } from 'rxjs'
-import { nMessage } from '@/app/utils/naive'
+import { nLoadingBar, nMessage } from '@/app/utils/naive'
+import LoginRoute from '@/app/pages/login/index.route'
+import IndexRoute from '@/app/pages/index/index.route'
 
 @Injectable()
 export class RouterService extends VueService {
@@ -23,7 +25,6 @@ export class RouterService extends VueService {
 			history: this.history,
 			routes: resolveInstances(routes),
 		})
-
 		this.subscribe()
 		this.beforeEnter()
 
@@ -33,21 +34,25 @@ export class RouterService extends VueService {
 	subscribe() {
 		this.authChangeSubcrition = this.authService.change$.subscribe(user => {
 			if (user) {
-				this.router.push({ path: '/' })
+				this.router.push({ name: IndexRoute.name })
 				nMessage()?.success('登陆成功')
 			} else {
-				this.router.push({ path: '/login' })
+				this.router.push({ name: LoginRoute.name })
 			}
 		})
 	}
 
 	beforeEnter() {
 		this.router.beforeEach((to, from) => {
-			if (!this.authService.hasLogin && to.path !== '/login') {
+			nLoadingBar()?.start()
+			if (!this.authService.hasLogin && to.name !== LoginRoute.name) {
 				return {
 					path: '/login',
 				}
 			}
+		})
+		this.router.afterEach((to, from) => {
+			nLoadingBar()?.finish()
 		})
 	}
 

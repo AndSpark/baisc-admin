@@ -1,6 +1,6 @@
 import { FormProps, NForm } from 'naive-ui'
-import { Computed, Link, Mut, VueService } from 'vue3-oop'
-import { h } from 'vue'
+import { Computed, Hook, Link, Mut, VueService } from 'vue3-oop'
+import { computed, createVNode, h, reactive, watch } from 'vue'
 import Validator from './validator'
 import type { FormInst } from 'naive-ui/es/form/src/interface'
 
@@ -9,9 +9,23 @@ export abstract class FormService<T extends Validator> extends VueService {
 	@Mut() abstract form: T
 	nFormProps: FormProps = {}
 
+	constructor() {
+		super()
+		watch(
+			() => this.innerRules,
+			val => {
+				this.rules = JSON.parse(JSON.stringify(this.innerRules))
+			},
+			{ deep: true }
+		)
+	}
+
+	@Mut() rules: any = {}
+
+	// NForm的rules不能直接用innerRules，没有效果
 	@Computed()
-	get rules() {
-		return this.form.createRules()
+	private get innerRules() {
+		return this.form?.createRules(this)
 	}
 
 	validate() {
@@ -22,7 +36,7 @@ export abstract class FormService<T extends Validator> extends VueService {
 		this.nForm.restoreValidation()
 	}
 
-	NForm = (a: any) => {
+	NForm(a: any) {
 		return h(
 			NForm,
 			Object.assign(

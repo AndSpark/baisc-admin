@@ -1,6 +1,6 @@
-import LoginService from '@/app/modules/login/login.service'
+import LoginService from '@/app/modules/auth/login/login.service'
 import { NButton, NForm, NFormItem, NInput } from 'naive-ui'
-import { Component, Link, VueComponent } from 'vue3-oop'
+import { Component, Link, Mut, VueComponent } from 'vue3-oop'
 
 @Component()
 export default class IndexPage extends VueComponent {

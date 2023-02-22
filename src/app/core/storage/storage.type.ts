@@ -1,5 +1,5 @@
 import { Token } from 'szpt-driver-api/auth'
-import { Theme } from '../theme/theme.service'
+import { Theme } from '../../modules/theme/theme.service'
 
 export type localStorageItem<T> = {
 	value: T

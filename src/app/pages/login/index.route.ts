@@ -8,8 +8,9 @@ import { injectService } from 'vue3-oop'
 export default class LoginRoute extends AbstractRoute {
 	path = '/login'
 	component = () => import('./index.page')
-
 	authService = injectService(AuthService)!
+
+	layout: 'basic' | 'blank' = 'blank'
 
 	beforeEnter: RouteRecord['beforeEnter'] = (to, from, next) => {
 		if (this.authService.hasLogin) {

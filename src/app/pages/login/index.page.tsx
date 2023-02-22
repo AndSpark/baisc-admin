@@ -1,6 +1,7 @@
+import { RouterService } from '@/app/core/router/router.service'
 import LoginService from '@/app/modules/auth/login/login.service'
 import { NButton, NFormItem, NInput } from 'naive-ui'
-import { Component, VueComponent } from 'vue3-oop'
+import { Component, injectService, VueComponent } from 'vue3-oop'
 
 @Component()
 export default class IndexPage extends VueComponent {

@@ -1,7 +1,7 @@
 import { Injectable } from 'injection-js'
 import { darkTheme, GlobalTheme, useOsTheme } from 'naive-ui'
 import { injectService, Mut, VueService } from 'vue3-oop'
-import { LocalStorageService } from '../storage/storage.service'
+import { LocalStorageService } from '../../core/storage/storage.service'
 
 export type Theme = GlobalTheme | null
 

@@ -1,13 +1,13 @@
-import { NCard, NConfigProvider } from 'naive-ui'
-import { RouterView } from 'vue-router'
+import { NConfigProvider } from 'naive-ui'
 import { Component, injectService, VueComponent } from 'vue3-oop'
 import NaiveProvider from './components/layout/naive-provider'
 import AuthService from './core/authentication/auth.service'
 import { HttpService } from './core/http/http'
 import { RouterService } from './core/router/router.service'
 import { LocalStorageService } from './core/storage/storage.service'
-import ThemeService from './core/theme/theme.service'
+import ThemeService from './modules/theme/theme.service'
 import RouterStart from './modules/router'
+import { RouterView } from 'vue-router'
 @Component({
 	providers: [
 		HttpService,
@@ -24,9 +24,7 @@ export default class App extends VueComponent {
 		return (
 			<NConfigProvider theme={this.themeService?.theme}>
 				<NaiveProvider>
-					<NCard style={'height:100vh'}>
-						<RouterView></RouterView>
-					</NCard>
+					<RouterView></RouterView>
 				</NaiveProvider>
 			</NConfigProvider>
 		)

@@ -1,5 +1,5 @@
 import AuthService from '@/app/core/authentication/auth.service'
-import AbstractRoute from '@/app/core/router/abstract-route'
+import AbstractRoute, { RouterLayout } from '@/app/core/router/abstract-route'
 import { Injectable } from 'injection-js'
 import type { RouteRecord } from 'vue-router'
 import { injectService } from 'vue3-oop'
@@ -10,7 +10,7 @@ export default class LoginRoute extends AbstractRoute {
 	component = () => import('./index.page')
 	authService = injectService(AuthService)!
 
-	layout: 'basic' | 'blank' = 'blank'
+	layout: RouterLayout = 'blank'
 
 	beforeEnter: RouteRecord['beforeEnter'] = (to, from, next) => {
 		if (this.authService.hasLogin) {

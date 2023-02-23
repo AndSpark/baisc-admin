@@ -1,6 +1,6 @@
 import { RouteRecord, RouteRecordNormalized } from 'vue-router'
 
-type RouterLayout = 'basic' | 'blank'
+export type RouterLayout = 'basic' | 'blank'
 
 export default abstract class AbstractRoute implements Partial<RouteRecordNormalized> {
 	name = Object.getPrototypeOf(this).constructor.name

@@ -1,5 +1,6 @@
 import { RouterService } from '@/app/core/router/router.service'
 import { injectService, VueComponent } from 'vue3-oop'
+import BasicLayout from './basic-layout'
 import BlankLayout from './blank-layout'
 
 export default class LayoutView extends VueComponent {
@@ -12,5 +13,6 @@ export default class LayoutView extends VueComponent {
 	render() {
 		if (this.routerService.currentRoute.meta.layout === 'blank')
 			return <BlankLayout>{this.$slots.default}</BlankLayout>
+		return <BasicLayout>{this.$slots.default}</BasicLayout>
 	}
 }

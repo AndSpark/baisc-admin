@@ -10,12 +10,13 @@ export default class LoginRoute extends AbstractRoute {
 	component = () => import('./index.page')
 	authService = injectService(AuthService)!
 
-	layout: RouterLayout = 'blank'
+	// layout: RouterLayout = 'blank'
 
 	beforeEnter: RouteRecord['beforeEnter'] = (to, from, next) => {
 		if (this.authService.hasLogin) {
 			return next('/')
 		}
+
 		next()
 	}
 }

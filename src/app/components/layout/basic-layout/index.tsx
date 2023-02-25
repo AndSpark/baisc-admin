@@ -3,6 +3,7 @@ import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import AdminLayout from '../admin-layout/index.vue'
 import { Transition, KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
+import BasicHearder from './common/basic-header'
 
 @Component()
 export default class BasicLayout extends VueComponent {
@@ -20,7 +21,7 @@ export default class BasicLayout extends VueComponent {
 			<AdminLayout
 				isMobile={this.isMobile.value}
 				v-slots={{
-					header: () => <div></div>,
+					header: () => <BasicHearder />,
 					tab: () => <div></div>,
 					sider: () => <div></div>,
 					footer: () => <div></div>,

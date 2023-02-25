@@ -6,7 +6,6 @@ const moduleRoutes = import.meta.glob('../../pages/**/*.route.ts', {
 	eager: true,
 	import: 'default',
 })
-
 Object.keys(moduleRoutes)
 	.map(k => moduleRoutes[k as string] as RouteRecordRaw | RouteRecordRaw[])
 	.filter(Boolean)

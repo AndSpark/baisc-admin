@@ -10,7 +10,7 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 	meta = {}
 
 	abstract path?: string | undefined
-	abstract component?: any
+	component?: any
 
 	initRoute() {
 		Object.assign(this.meta, { layout: this.layout })

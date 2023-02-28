@@ -5,8 +5,4 @@ import type { RouteRecord } from 'vue-router'
 @Injectable()
 export default class IndexRoute extends AbstractRoute {
 	hide = true
-
-	beforeEnter: RouteRecord['beforeEnter'] = (to, from, next) => {
-		next()
-	}
 }

@@ -5,6 +5,7 @@ import { Transition, KeepAlive } from 'vue'
 import { RouterView } from 'vue-router'
 import BasicHearder from './common/basic-header'
 import ThemeService from '@/app/core/theme/theme.service'
+import BasicSider from './common/basic-sider'
 
 @Component()
 export default class BasicLayout extends VueComponent {
@@ -22,11 +23,11 @@ export default class BasicLayout extends VueComponent {
 		return (
 			<AdminLayout
 				isMobile={this.isMobile.value}
-				siderVisible={false}
+				mode={'horizontal'}
 				v-slots={{
 					header: () => <BasicHearder />,
 					tab: () => <div></div>,
-					sider: () => <div></div>,
+					sider: () => <BasicSider></BasicSider>,
 					footer: () => <div></div>,
 					default: () => (
 						<RouterView

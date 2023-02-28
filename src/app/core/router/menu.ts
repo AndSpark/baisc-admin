@@ -14,17 +14,20 @@ export type RouteMenu = MenuOption & {
 export function transformRoutesToMenu(routes: readonly RouteRecordRaw[]) {
 	const Menu: RouteMenu[] = []
 	routes.forEach(route => {
-		if (route.meta?.hide) return
-		const { name, path, meta } = route
+		if (!route.meta || route.meta?.hide || !route.meta?.title) return
+		const { name, path, meta, component } = route
 		let routeChildren: RouteMenu[] = []
 		if (route.children) {
 			routeChildren = transformRoutesToMenu(route.children)
 		}
+
 		const MenuItem: RouteMenu = {
 			key: name as string,
-			label: () => h(RouterLink, { to: { name: route.name } }, { default: () => meta!.title! }),
+			label: component
+				? () => h(RouterLink, { to: { name: route.name } }, { default: () => meta!.title! })
+				: meta.title!,
 			routeName: name as string,
-			routePath: route.path,
+			routePath: path,
 			icon: meta?.icon ? () => h('i', { class: 'iconfont ' + meta.icon }) : undefined,
 		}
 		if (routeChildren.length) MenuItem.children = routeChildren

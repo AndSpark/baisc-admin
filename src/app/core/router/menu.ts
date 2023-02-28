@@ -1,12 +1,13 @@
 import { MenuOption } from 'naive-ui'
-import { RouteRecordRaw } from 'vue-router'
+import { h, VNodeChild } from 'vue'
+import { RouteRecordRaw, RouterLink } from 'vue-router'
 
 export type RouteMenu = MenuOption & {
 	key: string
-	label: string
+	label: string | (() => VNodeChild)
 	routeName: string
 	routePath: string
-	icon?: () => import('vue').VNodeChild
+	icon?: () => VNodeChild
 	children?: RouteMenu[]
 }
 
@@ -21,9 +22,10 @@ export function transformRoutesToMenu(routes: readonly RouteRecordRaw[]) {
 		}
 		const MenuItem: RouteMenu = {
 			key: name as string,
-			label: meta!.title!,
+			label: () => h(RouterLink, { to: { name: route.name } }, { default: () => meta!.title! }),
 			routeName: name as string,
 			routePath: route.path,
+			icon: meta?.icon ? () => h('i', { class: 'iconfont ' + meta.icon }) : undefined,
 		}
 		if (routeChildren.length) MenuItem.children = routeChildren
 		Menu.push(MenuItem)

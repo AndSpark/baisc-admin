@@ -14,7 +14,7 @@ export default class BasicLogo extends VueComponent<BasicLogoProps> {
 
 	render() {
 		return (
-			<RouterLink to={IndexRoute.name} class='flex-x-center'>
+			<RouterLink to={{ name: IndexRoute.name }} class='flex-x-center'>
 				<SvgIcon icon={'vite'} class=' w-30px h-30px'></SvgIcon>
 				<h2
 					v-show={this.$props.showTitle}

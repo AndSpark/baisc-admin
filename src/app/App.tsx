@@ -23,6 +23,7 @@ export default class App extends VueComponent {
 	render() {
 		return (
 			<NConfigProvider
+				class='h-full'
 				theme={this.themeService.naiveTheme}
 				themeOverrides={this.themeService.naiveThemeOverrides}
 			>

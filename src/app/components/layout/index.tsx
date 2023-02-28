@@ -1,14 +1,10 @@
 import { RouterService } from '@/app/core/router/router.service'
-import { injectService, VueComponent } from 'vue3-oop'
+import { Component, injectService, VueComponent } from 'vue3-oop'
 import BasicLayout from './basic-layout'
 import BlankLayout from './blank-layout'
-
+@Component()
 export default class LayoutView extends VueComponent {
 	routerService = injectService(RouterService)!
-
-	init() {
-		console.log(this.routerService.currentRoute)
-	}
 
 	render() {
 		if (this.routerService.currentRoute.meta.layout === 'blank')

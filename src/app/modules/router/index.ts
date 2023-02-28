@@ -2,7 +2,7 @@ import { RouterService } from '@/app/core/router/router.service'
 import { Injectable } from 'injection-js'
 import { injectService } from 'vue3-oop'
 import AuthRouterService from './auth.router'
-import LoadingRouterService from './loading.router'
+import OtherRouterService from './other.router'
 
 @Injectable()
 export default class RouterStart {
@@ -10,10 +10,10 @@ export default class RouterStart {
 
 	constructor(
 		private authRouterService: AuthRouterService,
-		private loadingRouterService: LoadingRouterService
+		private otherRouterService: OtherRouterService
 	) {
 		this.routerService.initRoutes()
-		this.loadingRouterService.init()
+		this.otherRouterService.init()
 		this.authRouterService.init()
 	}
 }

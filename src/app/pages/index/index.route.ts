@@ -6,6 +6,7 @@ import type { RouteRecord } from 'vue-router'
 export default class IndexRoute extends AbstractRoute {
 	path = '/'
 	component = () => import('./index.page')
+	hide = true
 
 	beforeEnter: RouteRecord['beforeEnter'] = (to, from, next) => {
 		next()

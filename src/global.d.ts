@@ -1,3 +1,15 @@
+import 'vue-router'
+export type RouterLayout = 'basic' | 'blank'
+
+declare module 'vue-router' {
+	interface RouteMeta {
+		title?: string
+		icon?: string
+		layout?: RouterLayout
+		hide?: boolean
+	}
+}
+
 declare type DeepPartial<T> = T extends Function
 	? T
 	: T extends object

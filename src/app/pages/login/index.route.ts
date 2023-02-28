@@ -7,8 +7,6 @@ import { injectService } from 'vue3-oop'
 
 @Injectable()
 export default class LoginRoute extends AbstractRoute {
-	path = '/login'
-	component = () => import('./index.page')
 	authService = injectService(AuthService)!
 
 	layout: RouterLayout = 'blank'

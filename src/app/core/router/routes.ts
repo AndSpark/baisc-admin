@@ -4,6 +4,25 @@ const moduleRoutes = import.meta.glob('../../pages/**/*.route.ts', {
 	eager: true,
 	import: 'default',
 })
+const pages = import.meta.glob('../../pages/**/*.page.tsx', {
+	eager: true,
+	import: 'default',
+})
+
+const routesMap: any = {}
+
+Object.keys(moduleRoutes).forEach(k => {
+	const route = moduleRoutes[k] as any
+	const path = k.match(/pages(\/.*)\//)![1]
+	routesMap[route.name] = { path }
+	Object.keys(pages).forEach(k2 => {
+		const reg = new RegExp(`${path}\/(\\w+\.page\.tsx)`)
+		if (k2.match(reg)?.[1]) {
+			//@ts-ignore
+			routesMap[route.name] = { ...routesMap[route.name], component: pages[k2] }
+		}
+	})
+})
 
 function formatRoutes(routes: Record<string, any>, originKey = 'pages') {
 	const routes2: any = {}
@@ -13,6 +32,7 @@ function formatRoutes(routes: Record<string, any>, originKey = 'pages') {
 		const basicKey = key.match(/^\w+/)![0]
 		const val = { [k]: routes[k] }
 		const isEnd = k.match(/\//g)?.length === 1
+
 		if (originKey !== 'pages') {
 			if (isEnd) {
 				routes2._self = routes[k]
@@ -57,7 +77,10 @@ function resolveRoutes(routes: any) {
 	c.forEach(v => {
 		routes2[v[0]].children = resolveRoutes(v[1])
 	})
-	routes2.forEach(v => v.initRoute())
+	routes2.forEach(v => {
+		v.initRoute()
+		Object.assign(v, routesMap[v.name])
+	})
 	return routes2
 }
 

@@ -4,8 +4,6 @@ import type { RouteRecord } from 'vue-router'
 
 @Injectable()
 export default class IndexRoute extends AbstractRoute {
-	path = '/'
-	component = () => import('./index.page')
 	hide = true
 
 	beforeEnter: RouteRecord['beforeEnter'] = (to, from, next) => {

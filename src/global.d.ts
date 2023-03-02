@@ -7,6 +7,7 @@ declare module 'vue-router' {
 		icon?: string
 		layout?: RouterLayout
 		hide?: boolean
+		multiple?: boolean
 	}
 }
 

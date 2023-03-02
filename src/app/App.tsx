@@ -8,6 +8,7 @@ import { LocalStorageService } from './core/storage/storage.service'
 import RouterStart from './modules/router'
 import { RouterView } from 'vue-router'
 import ThemeService from './core/theme/theme.service'
+import TabService from './core/router/tab.service'
 @Component({
 	providers: [
 		HttpService,
@@ -16,6 +17,7 @@ import ThemeService from './core/theme/theme.service'
 		RouterStart,
 		LocalStorageService,
 		ThemeService,
+		TabService,
 	],
 })
 export default class App extends VueComponent {

@@ -48,8 +48,8 @@ export default class AuthService extends VueService {
 
 	private setToken(token: Token) {
 		this.token = token
-		this.token.refreshTokenExpire = getNow() + token.refreshTokenExpire
-		this.token.tokenExpire = getNow() + token.tokenExpire
+		this.token.refreshTokenExpire = getNow() + token.refreshTokenExpire * 1000
+		this.token.tokenExpire = getNow() + token.tokenExpire * 1000
 		this.storage.set('token', this.token)
 	}
 

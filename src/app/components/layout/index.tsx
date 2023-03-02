@@ -7,8 +7,7 @@ export default class LayoutView extends VueComponent {
 	routerService = injectService(RouterService)!
 
 	render() {
-		if (this.routerService.currentRoute.meta.layout === 'blank')
-			return <BlankLayout>{this.$slots.default}</BlankLayout>
-		return <BasicLayout>{this.$slots.default}</BasicLayout>
+		if (this.routerService.currentRoute.meta.layout === 'blank') return <BlankLayout></BlankLayout>
+		return <BasicLayout></BasicLayout>
 	}
 }

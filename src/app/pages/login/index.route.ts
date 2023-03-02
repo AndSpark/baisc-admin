@@ -9,7 +9,7 @@ import { injectService } from 'vue3-oop'
 export default class LoginRoute extends AbstractRoute {
 	authService = injectService(AuthService)!
 
-	layout: RouterLayout = 'blank'
+	// layout: RouterLayout = 'blank'
 	title = '欢迎登陆'
 	hide = true
 

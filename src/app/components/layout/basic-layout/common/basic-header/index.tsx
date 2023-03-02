@@ -6,8 +6,9 @@ import HeaderMenu from './components/headerMenu'
 export default class BasicHearder extends VueComponent {
 	render() {
 		return (
-			<DarkModeContainer class='flex-y-center h-full'>
+			<DarkModeContainer class='flex-y-center h-full shadow'>
 				<BasicLogo></BasicLogo>
+				<HeaderMenu></HeaderMenu>
 			</DarkModeContainer>
 		)
 	}

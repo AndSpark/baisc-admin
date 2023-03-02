@@ -17,7 +17,10 @@ export default class BlankLayout extends VueComponent<BlankLayoutProps> {
 	render() {
 		return (
 			<NLayout
-				class={[this.$props.showPadding ? 'p-4' : '', 'h-full transition duration-300 ease-in-out']}
+				class={[
+					this.$props.showPadding ? 'p-4' : '',
+					'h-full bg-[#f6f9f8] dark:bg-[#101014] transition duration-300 ease-in-out',
+				]}
 			>
 				<RouterView
 					v-slots={{

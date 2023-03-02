@@ -198,7 +198,9 @@ function handleClickMask() {
   siderCollapseStatus.value = true
 }
 
-const showMask = computed(() => props.isMobile && !siderCollapseStatus.value)
+const showMask = computed(
+  () => props.isMobile && !siderCollapseStatus.value && props.siderVisible
+)
 
 const siderStyle = computed(() => {
   const { transitionDuration, transitionTimingFunction } = props

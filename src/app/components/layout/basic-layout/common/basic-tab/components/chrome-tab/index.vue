@@ -124,6 +124,7 @@ const { c } = CssRender()
 const style = c(
   '.admin-tab__chrome-tab',
   {
+    width: '300px',
     position: 'relative',
     display: 'inline-flex',
     alignItems: 'center',
@@ -152,9 +153,14 @@ const style = c(
       position: 'relative',
       zIndex: 2,
       whiteSpace: 'nowrap',
+      width: 'calc(100% - 10px )',
+      minWidth: '16px',
+      overflow: 'hidden',
     }),
     c('&__icon', {
-      paddingLeft: '18px',
+      position: 'absolute',
+
+      right: '16px',
     }),
     c(
       '&__divider',

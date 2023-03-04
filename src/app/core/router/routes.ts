@@ -14,7 +14,11 @@ const routesMap: any = {}
 Object.keys(moduleRoutes).forEach(k => {
 	const route = moduleRoutes[k] as any
 	const path = k.match(/pages(\/.*)\//)![1]
-	routesMap[route.name] = { path }
+	if (path === '/index') {
+		routesMap[route.name] = { path: '/' }
+	} else {
+		routesMap[route.name] = { path }
+	}
 	Object.keys(pages).forEach(k2 => {
 		const reg = new RegExp(`${path}\/(\\w+\.page\.tsx)`)
 		if (k2.match(reg)?.[1]) {

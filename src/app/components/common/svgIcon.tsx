@@ -4,13 +4,15 @@ import svgIcons from '@/assets/svg'
 import { h } from 'vue'
 
 class SvgIconProps {
-	icon: 'vite' | undefined = undefined
+	icon: 'vite' | 'refresh' | undefined = undefined
 }
 
 export default class SvgIcon extends VueComponent<SvgIconProps> {
 	static defaultProps = setProps(SvgIconProps)
 
 	render() {
-		return h(svgIcons[this.$props.icon!])
+		return h(svgIcons[this.$props.icon!], {
+			class: 'dark:fill-white dark:fill-opacity-82 ',
+		})
 	}
 }

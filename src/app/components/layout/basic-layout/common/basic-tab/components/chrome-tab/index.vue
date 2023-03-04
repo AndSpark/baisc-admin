@@ -101,7 +101,7 @@ withDefaults(defineProps<Props>(), {
   primaryColor: '#1890ff',
   closable: true,
   bgColor: () => ['#ffffff', '#18181c'],
-  hoverBgColor: () => ['#dee1e6', '#3f3c37'],
+  hoverBgColor: () => ['#dee1e6', 'rgb(50,50,50)'],
   mixColor: () => ['#ffffff', '#000'],
   mixRatio: () => [0.13, 0.35],
 })
@@ -133,6 +133,7 @@ const style = c(
     paddingRight: '24px',
     marginRight: '-18px',
     cursor: 'pointer',
+    overflow: 'hidden',
   },
   [
     c('&--active', {
@@ -179,7 +180,7 @@ const style = c(
           opacity: 0,
         }),
         c('&--dark', {
-          backgroundColor: 'rgba(255,255,255,0.9) !important',
+          backgroundColor: 'rgba(255,255,255,0.4) !important',
         }),
       ]
     ),

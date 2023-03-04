@@ -11,6 +11,8 @@ class HoverContainerProps {
 	contentClass?: string = undefined
 	/** 反转模式下 */
 	inverted?: boolean = undefined
+
+	onClick?: () => any = undefined
 }
 
 export default class HoverContainer extends VueComponent<HoverContainerProps> {
@@ -31,21 +33,25 @@ export default class HoverContainer extends VueComponent<HoverContainerProps> {
 	render() {
 		if (this.showToolTip)
 			return (
-				<div>
-					<NTooltip
-						placement={this.$props.placement}
-						trigger='hover'
-						v-slots={{
-							trigger: () => (
-								<div
-									class={['flex-center cursor-pointer dark:hover:bg-[#333]', this.contentClassName]}
-								>
-									{this.$slots.default?.()}
-								</div>
-							),
-						}}
-					></NTooltip>
-				</div>
+				<NTooltip
+					placement={this.$props.placement}
+					trigger='hover'
+					v-slots={{
+						trigger: () => (
+							<div
+								onClick={() => this.$props.onClick?.()}
+								class={[
+									'flex-center cursor-pointer px-2 dark:hover:bg-[#333]',
+									this.contentClassName,
+								]}
+							>
+								{this.$slots.default?.()}
+							</div>
+						),
+					}}
+				>
+					{this.$props.tooltipContent}
+				</NTooltip>
 			)
 		return (
 			<div class={['flex-center cursor-pointer dark:hover:bg-[#333]', this.contentClassName]}>

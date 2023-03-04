@@ -1,4 +1,4 @@
-import { Component, injectService, VueComponent } from 'vue3-oop'
+import { Component, injectService, Link, VueComponent } from 'vue3-oop'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import AdminLayout from '../admin-layout/index.vue'
 import { Transition, KeepAlive } from 'vue'
@@ -7,11 +7,13 @@ import BasicHearder from './common/basic-header'
 import ThemeService from '@/app/core/theme/theme.service'
 import BasicSider from './common/basic-sider'
 import BasicTab from './common/basic-tab'
+import { RouterService } from '@/app/core/router/router.service'
 
 @Component()
 export default class BasicLayout extends VueComponent {
 	isMobile
 	themeService = injectService(ThemeService)!
+	routerService = injectService(RouterService)!
 
 	constructor() {
 		super()
@@ -41,8 +43,10 @@ export default class BasicLayout extends VueComponent {
 												mode={'out-in'}
 												appear
 											>
-												<KeepAlive>
-													<e.Component key={e.route.fullPath}></e.Component>
+												<KeepAlive exclude={this.routerService.excludes}>
+													{this.routerService.reloadFlag && (
+														<e.Component key={e.route.fullPath}></e.Component>
+													)}
 												</KeepAlive>
 											</Transition>
 										)

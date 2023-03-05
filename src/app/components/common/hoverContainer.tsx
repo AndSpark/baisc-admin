@@ -6,7 +6,7 @@ class HoverContainerProps {
 	/** tooltip显示文本 */
 	tooltipContent?: string = undefined
 	/** tooltip的位置 */
-	placement?: PopoverPlacement = undefined
+	placement?: PopoverPlacement = 'bottom-end'
 	/** class类 */
 	contentClass?: string = undefined
 	/** 反转模式下 */
@@ -41,7 +41,7 @@ export default class HoverContainer extends VueComponent<HoverContainerProps> {
 							<div
 								onClick={() => this.$props.onClick?.()}
 								class={[
-									'flex-center cursor-pointer px-2 dark:hover:bg-[#333]',
+									'flex-center cursor-pointer px-2 dark:hover:bg-[#333] h-full',
 									this.contentClassName,
 								]}
 							>

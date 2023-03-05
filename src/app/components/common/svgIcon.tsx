@@ -4,7 +4,7 @@ import svgIcons from '@/assets/svg'
 import { h } from 'vue'
 
 class SvgIconProps {
-	icon: 'vite' | 'refresh' | undefined = undefined
+	icon: 'vite' | 'refresh' | 'fullscreen' | 'fullscreenExit' | undefined = undefined
 }
 
 export default class SvgIcon extends VueComponent<SvgIconProps> {
@@ -12,7 +12,7 @@ export default class SvgIcon extends VueComponent<SvgIconProps> {
 
 	render() {
 		return h(svgIcons[this.$props.icon!], {
-			class: 'dark:fill-white dark:fill-opacity-82 ',
+			class: 'dark:fill-white dark:fill-opacity-82 w-4',
 		})
 	}
 }

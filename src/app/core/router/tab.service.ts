@@ -1,3 +1,4 @@
+import { LocalMut } from '@/app/decorators/vue3-oop/localMut'
 import { Injectable } from 'injection-js'
 import { RouteLocationNormalized } from 'vue-router'
 import { injectService, Mut, VueService } from 'vue3-oop'
@@ -9,8 +10,8 @@ type Tab = Pick<RouteLocationNormalized, 'name' | 'fullPath' | 'meta'>
 export default class TabService extends VueService {
 	routerService = injectService(RouterService)!
 
-	@Mut() tabs: Tab[] = []
-	@Mut() activeTabPath: string | null = null
+	@LocalMut([]) tabs!: Tab[]
+	@LocalMut(null) activeTabPath!: string | null
 
 	setActiveTab(path: string) {
 		this.activeTabPath = path

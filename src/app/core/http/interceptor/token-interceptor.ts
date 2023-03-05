@@ -3,7 +3,6 @@ import { Injectable } from 'injection-js'
 import { injectService } from 'vue3-oop'
 import AuthService from '../../authentication/auth.service'
 import { RouterService } from '../../router/router.service'
-import { LocalStorageService } from '../../storage/storage.service'
 import AbstractInterceptor, { AxiosRequest } from './abstract-interceptor'
 
 let refreshRequest: null | Promise<any> = null

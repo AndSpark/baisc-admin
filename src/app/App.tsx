@@ -4,21 +4,14 @@ import NaiveProvider from './components/layout/naive-provider'
 import AuthService from './core/authentication/auth.service'
 import { HttpService } from './core/http/http'
 import { RouterService } from './core/router/router.service'
-import { LocalStorageService } from './core/storage/storage.service'
 import RouterStart from './modules/router'
 import { RouterView } from 'vue-router'
 import ThemeService from './core/theme/theme.service'
 import TabService from './core/router/tab.service'
+import './decorators/vue3-oop/index'
+
 @Component({
-	providers: [
-		HttpService,
-		AuthService,
-		RouterService,
-		RouterStart,
-		LocalStorageService,
-		ThemeService,
-		TabService,
-	],
+	providers: [HttpService, AuthService, RouterService, RouterStart, ThemeService, TabService],
 })
 export default class App extends VueComponent {
 	themeService = injectService(ThemeService)!

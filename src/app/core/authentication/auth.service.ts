@@ -4,15 +4,11 @@ import { Mut, VueService } from 'vue3-oop'
 import { authApi } from 'szpt-driver-api'
 import { Token, User, UsernamePasswordLoginForm } from 'szpt-driver-api/auth'
 import { Subject } from 'rxjs'
-import { LocalStorageService } from '../storage/storage.service'
+import { localGet, localRemove, localSet } from '@/app/utils/local-storage'
 @Injectable()
 export default class AuthService extends VueService {
-	constructor(private storage: LocalStorageService) {
-		super()
-		this.token = this.storage.get('token')
-	}
 	@Mut() user: User | null = null
-	@Mut() token: Token | null = null
+	@Mut() token: Token | null = localGet('token')
 
 	change$ = new Subject<User | null>()
 
@@ -50,7 +46,7 @@ export default class AuthService extends VueService {
 		this.token = token
 		this.token.refreshTokenExpire = getNow() + token.refreshTokenExpire * 1000
 		this.token.tokenExpire = getNow() + token.tokenExpire * 1000
-		this.storage.set('token', this.token)
+		localSet('token', this.token)
 	}
 
 	private checkTokenExpire() {
@@ -65,6 +61,6 @@ export default class AuthService extends VueService {
 		this.user = null
 		this.token = null
 		this.change$.next(this.user)
-		this.storage.remove('token')
+		localRemove('token')
 	}
 }

@@ -33,9 +33,13 @@ export default class TabService extends VueService {
 
 	removeTab(path: string) {
 		const index = this.tabs.findIndex(tab => tab.fullPath === path)
-		console.log(index)
-		if (index > -1) {
-			this.tabs.splice(index, 1)
+		if (index === -1) return
+		const isActive = path === this.activeTabPath
+		if (isActive) {
+			const nextIndex = index === this.tabs.length - 1 ? index - 1 : index + 1
+			this.setActiveTab(this.tabs[nextIndex].fullPath)
+			this.routerService.router.push({ path: this.activeTabPath! })
 		}
+		this.tabs.splice(index, 1)
 	}
 }

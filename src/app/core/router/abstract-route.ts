@@ -6,6 +6,7 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 	meta: RouteMeta = {}
 
 	layout: RouterLayout = 'basic'
+	index: number = 0
 	title?: string
 	icon?: string
 	hide?: boolean
@@ -16,6 +17,7 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 			icon: this.icon || this.meta.icon,
 			title: this.title || this.meta.title,
 			hide: this.hide || this.meta.hide,
+			index: this.index || this.meta.index,
 		})
 	}
 

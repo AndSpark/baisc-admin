@@ -8,6 +8,7 @@ declare module 'vue-router' {
 		layout?: RouterLayout
 		hide?: boolean
 		multiple?: boolean
+		index?: number
 	}
 }
 

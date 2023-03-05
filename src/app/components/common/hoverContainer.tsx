@@ -41,7 +41,7 @@ export default class HoverContainer extends VueComponent<HoverContainerProps> {
 							<div
 								onClick={() => this.$props.onClick?.()}
 								class={[
-									'flex-center cursor-pointer px-2 dark:hover:bg-[#333] h-full',
+									'flex-center cursor-pointer px-2 dark:hover:bg-[#333]  ',
 									this.contentClassName,
 								]}
 							>

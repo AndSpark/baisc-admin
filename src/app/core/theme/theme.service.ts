@@ -23,6 +23,10 @@ export default class ThemeService extends VueService {
 		this.watchTheme()
 	}
 
+	setDarkMode() {
+		this.theme.darkMode = !this.theme.darkMode
+	}
+
 	private watchTheme() {
 		const osTheme = useOsTheme()
 

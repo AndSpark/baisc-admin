@@ -1,18 +1,27 @@
 import { setProps } from '@/app/utils/helper/oop'
 import { VueComponent } from 'vue3-oop'
-import svgIcons from '@/assets/svg'
 import { h } from 'vue'
 
 class SvgIconProps {
-	icon: 'vite' | 'refresh' | 'fullscreen' | 'fullscreenExit' | undefined = undefined
+	icon: 'vite' | 'refresh' | 'fullscreen' | 'fullscreenExit' | 'sun' | 'moon' | undefined =
+		undefined
 }
+
+const svgs = import.meta.glob('../../../assets//svg/*.svg', {
+	eager: true,
+	import: 'default',
+}) as any
 
 export default class SvgIcon extends VueComponent<SvgIconProps> {
 	static defaultProps = setProps(SvgIconProps)
 
 	render() {
-		return h(svgIcons[this.$props.icon!], {
-			class: 'dark:fill-white dark:fill-opacity-82 w-4',
-		})
+		for (const key in svgs) {
+			if (key.includes(this.$props.icon!)) {
+				return h(svgs[key], {
+					class: 'dark:fill-white dark:fill-opacity-82  ',
+				})
+			}
+		}
 	}
 }

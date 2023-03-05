@@ -10,11 +10,6 @@ export default class HeaderMenu extends VueComponent {
 	}
 
 	render() {
-		console.log(this.routerService.menu)
-		return (
-			<div>
-				<NMenu options={this.routerService.menu} mode={'horizontal'}></NMenu>
-			</div>
-		)
+		return <NMenu options={this.routerService.menu} mode={'horizontal'}></NMenu>
 	}
 }

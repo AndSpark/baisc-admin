@@ -26,7 +26,11 @@ export default class Fullscreen extends VueComponent {
 
 	render() {
 		return (
-			<HoverContainer tooltip-content={this.tooltip} onClick={() => this.handleClick()}>
+			<HoverContainer
+				contentClass='h-full'
+				tooltip-content={this.tooltip}
+				onClick={() => this.handleClick()}
+			>
 				<SvgIcon
 					class='w-6  '
 					icon={this.isFullscreen.value ? 'fullscreenExit' : 'fullscreen'}

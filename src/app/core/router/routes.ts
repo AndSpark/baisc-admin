@@ -82,7 +82,7 @@ function resolveRoutes(routes: any) {
 	c.forEach(v => {
 		routes2[v[0]].children = resolveRoutes(v[1])
 	})
-	routes2.sort((a, b) => a.index - b.index)
+	routes2.sort((a, b) => a.sort - b.sort)
 	routes2.forEach(v => {
 		v.initRoute()
 		Object.assign(v, routesMap[v.name])

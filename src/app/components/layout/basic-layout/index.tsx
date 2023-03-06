@@ -33,26 +33,32 @@ export default class BasicLayout extends VueComponent {
 					sider: () => <BasicSider></BasicSider>,
 					footer: () => <div></div>,
 					default: () => (
-						<RouterView
-							v-slots={{
-								default: (e: any) => {
-									if (e.Component)
-										return (
-											<Transition
-												name={this.themeService.theme.page.animateMode}
-												mode={'out-in'}
-												appear
-											>
-												<KeepAlive exclude={this.routerService.excludes}>
-													{this.routerService.reloadFlag && (
-														<e.Component key={e.route.fullPath}></e.Component>
-													)}
-												</KeepAlive>
-											</Transition>
-										)
-								},
-							}}
-						></RouterView>
+						<div
+							class={[
+								'p-4 h-full bg-[#f6f9f8] dark:bg-[#101014] transition duration-300 ease-in-out',
+							]}
+						>
+							<RouterView
+								v-slots={{
+									default: (e: any) => {
+										if (e.Component)
+											return (
+												<Transition
+													name={this.themeService.theme.page.animateMode}
+													mode={'out-in'}
+													appear
+												>
+													<KeepAlive exclude={this.routerService.excludes}>
+														{this.routerService.reloadFlag && (
+															<e.Component key={e.route.fullPath}></e.Component>
+														)}
+													</KeepAlive>
+												</Transition>
+											)
+									},
+								}}
+							></RouterView>
+						</div>
 					),
 				}}
 			></AdminLayout>

@@ -35,7 +35,7 @@ export default class BasicTab extends VueComponent {
 									onClick={() => this.tabService.handleTabClick(v.fullPath)}
 									isActive={v.fullPath === this.tabService.activeTabPath}
 								>
-									<div>
+									<div class='select-none'>
 										<i class={['iconfont mr-2 ', v.meta.icon]}></i>
 										{v.meta.title}
 									</div>

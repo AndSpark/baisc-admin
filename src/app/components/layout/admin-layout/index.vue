@@ -130,7 +130,7 @@ const props = withDefaults(defineProps<Props>(), {
   headerVisible: true,
   headerHeight: 56,
   tabVisible: true,
-  tabHeight: 44,
+  tabHeight: 36,
   fixedHeaderAndTab: true,
   addMainOverflowHidden: false,
   footerVisible: true,

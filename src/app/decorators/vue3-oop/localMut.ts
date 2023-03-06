@@ -1,14 +1,14 @@
 import { localGet, localSet } from '@/app/utils/local-storage'
-import { ref, watch } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
 import { createDecorator, getProtoMetadata, Hanlder } from 'vue3-oop'
 
 export const LocalMut: LocalMutDecorator = createDecorator('LocalMut')
 export interface LocalMutDecorator {
-	(defaultVal?: any): PropertyDecorator
+	(expire?: number): PropertyDecorator
 	MetadataKey: symbol | string
 }
 function handler(targetThis: Record<any, any>) {
-	const list = getProtoMetadata<string | undefined>(targetThis, LocalMut.MetadataKey)
+	const list = getProtoMetadata<number | undefined>(targetThis, LocalMut.MetadataKey)
 	if (!list || !list.length) return
 	for (const item of list) {
 		const { options, key } = item
@@ -25,15 +25,17 @@ function handler(targetThis: Record<any, any>) {
 			},
 		})
 
+		onBeforeMount(() => {
+			targetThis[key as string] = localGet(localKey) || targetThis[key as string]
+		})
+
 		watch(
 			keyVal,
 			val => {
-				localSet(localKey, val)
+				localSet(localKey, val, options || 0)
 			},
 			{ deep: true }
 		)
-
-		targetThis[key as string] = localGet(localKey) || options
 	}
 }
 

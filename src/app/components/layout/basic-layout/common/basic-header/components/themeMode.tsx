@@ -10,7 +10,7 @@ export default class DarkMode extends VueComponent {
 	render() {
 		return (
 			<HoverContainer
-				contentClass='h-full'
+				contentClass='h-full w-10'
 				tooltipContent='主题模式'
 				onClick={() => this.themeService.setDarkMode()}
 			>

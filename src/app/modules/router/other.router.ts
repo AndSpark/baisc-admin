@@ -18,8 +18,7 @@ export default class OtherRouterService {
 		this.routerService.router.beforeEach((to, from) => {
 			nLoadingBar()?.start()
 			useTitle(to.meta.title)
-			this.tabService.addTab(to)
-			this.tabService.setActiveTab(to.fullPath)
+			this.tabService.beforeRouteEnter(to)
 		})
 		this.routerService.router.afterEach((to, from) => {
 			nLoadingBar()?.finish()

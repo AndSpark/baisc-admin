@@ -4,6 +4,7 @@ import BasicLogo from '../basic-logo'
 import ThemeMode from './components/themeMode'
 import Fullscreen from './components/fullScreen'
 import HeaderMenu from './components/headerMenu'
+import Notification from './components/notification'
 
 export default class BasicHearder extends VueComponent {
 	render() {
@@ -14,6 +15,7 @@ export default class BasicHearder extends VueComponent {
 				<div class='flex-1'></div>
 				<Fullscreen />
 				<ThemeMode />
+				<Notification></Notification>
 			</DarkModeContainer>
 		)
 	}

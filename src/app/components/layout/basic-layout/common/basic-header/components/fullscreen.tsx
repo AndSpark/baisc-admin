@@ -27,7 +27,7 @@ export default class Fullscreen extends VueComponent {
 	render() {
 		return (
 			<HoverContainer
-				contentClass='h-full'
+				contentClass='h-full w-10'
 				tooltip-content={this.tooltip}
 				onClick={() => this.handleClick()}
 			>

@@ -3,8 +3,15 @@ import { VueComponent } from 'vue3-oop'
 import { h } from 'vue'
 
 class SvgIconProps {
-	icon: 'vite' | 'refresh' | 'fullscreen' | 'fullscreenExit' | 'sun' | 'moon' | undefined =
-		undefined
+	icon:
+		| 'vite'
+		| 'refresh'
+		| 'fullscreen'
+		| 'fullscreenExit'
+		| 'sun'
+		| 'moon'
+		| 'notification'
+		| undefined = undefined
 }
 
 const svgs = import.meta.glob('../../../assets//svg/*.svg', {

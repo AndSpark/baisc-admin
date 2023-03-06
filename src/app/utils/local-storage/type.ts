@@ -8,7 +8,6 @@ export type localStorageItem<T> = {
 export type StorageData = {
 	token: Token
 	user: 'user'
-	[x: string]: any
 }
 
 export type StorageKey = keyof StorageData

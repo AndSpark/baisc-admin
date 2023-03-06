@@ -10,8 +10,15 @@ type Tab = Pick<RouteLocationNormalized, 'name' | 'fullPath' | 'meta'>
 export default class TabService extends VueService {
 	routerService = injectService(RouterService)!
 
-	@LocalMut([]) tabs!: Tab[]
-	@LocalMut(null) activeTabPath!: string | null
+	@LocalMut() tabs: Tab[] = []
+	@LocalMut() activeTabPath: string | null = null
+
+	beforeRouteEnter(route: RouteLocationNormalized) {
+		// blank布局没有tab
+		if (route.meta.layout === 'blank') return
+		this.addTab(route)
+		this.setActiveTab(route.fullPath)
+	}
 
 	setActiveTab(path: string) {
 		this.activeTabPath = path

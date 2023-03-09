@@ -22,7 +22,7 @@ export default class BasicTab extends VueComponent {
 
 	render() {
 		return (
-			<DarkModeContainer class='shadow-sm'>
+			<DarkModeContainer class='shadow-sm relative top-2'>
 				<div class='flex '>
 					<div class=' flex pr-5' style='width:calc(100% - 34px)'>
 						<TransitionGroup name='tab'>

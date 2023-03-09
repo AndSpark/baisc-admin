@@ -9,9 +9,18 @@ import { RouterView } from 'vue-router'
 import ThemeService from './core/theme/theme.service'
 import TabService from './core/router/tab.service'
 import './decorators/vue3-oop/index'
+import WebSocketService from './core/websocket/websocket.service'
 
 @Component({
-	providers: [HttpService, AuthService, RouterService, RouterStart, ThemeService, TabService],
+	providers: [
+		HttpService,
+		AuthService,
+		RouterService,
+		RouterStart,
+		WebSocketService,
+		ThemeService,
+		TabService,
+	],
 })
 export default class App extends VueComponent {
 	themeService = injectService(ThemeService)!

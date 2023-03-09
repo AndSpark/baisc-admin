@@ -1,16 +1,17 @@
-export type Topic = 'bpmn' | 'evidence'
+import { EnumTopic } from './enum'
 
 export type TopicHandlers = {
-	[x in Topic]?: ((response: TopicResponses[x]) => any)[]
+	[x in EnumTopic]?: ((response: TopicResponses[x]) => any)[]
 }
 
-export type TopicHandler<T extends Topic> = (response: TopicResponse<T>) => any
+export type TopicHandler<T extends EnumTopic> = (response: TopicResponse<T>) => any
 
-export type TopicResponse<T extends Topic> = TopicResponses[T]
+export type TopicResponse<T extends EnumTopic> = TopicResponses[T]
 
 export type TopicResponses = {
-	bpmn: BpmnTopicResponse
-	evidence: any
+	[EnumTopic.BPMN]: BpmnTopicResponse
+	[EnumTopic.EVIDENCE]: any
+	[x: string]: any
 }
 
 export type BpmnTopicResponse = {

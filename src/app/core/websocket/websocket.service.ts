@@ -6,6 +6,7 @@ import { first, from, interval, Subscription, timeout, timer } from 'rxjs'
 import { v4 } from 'uuid'
 import { TopicHandler, TopicHandlers } from './type'
 import { EnumPublishDestination, EnumTopic } from './enum'
+import { isDefine } from '@/app/utils/common/typeof'
 
 @Injectable()
 export default class WebSocketService extends VueService {
@@ -24,7 +25,7 @@ export default class WebSocketService extends VueService {
 		if (this.authService.token) this.connect()
 
 		this.authService.change$.subscribe(user => {
-			if (!user) {
+			if (!isDefine(user)) {
 				this.close()
 			} else {
 				this.connect()

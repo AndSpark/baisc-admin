@@ -1,4 +1,4 @@
-import { LocalMut } from '@/app/decorators/vue3-oop/localMut'
+import { LocalMut } from '@/app/utils/decorators/vue3-oop/localMut'
 import { Injectable } from 'injection-js'
 import { RouteLocationNormalized } from 'vue-router'
 import { injectService, Mut, VueService } from 'vue3-oop'

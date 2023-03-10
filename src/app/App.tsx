@@ -8,7 +8,7 @@ import RouterStart from './modules/router'
 import { RouterView } from 'vue-router'
 import ThemeService from './core/theme/theme.service'
 import TabService from './core/router/tab.service'
-import './decorators/vue3-oop/index'
+import './utils/decorators/vue3-oop/index'
 import WebSocketService from './core/websocket/websocket.service'
 
 @Component({

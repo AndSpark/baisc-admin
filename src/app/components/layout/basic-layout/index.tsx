@@ -27,6 +27,7 @@ export default class BasicLayout extends VueComponent {
 			<AdminLayout
 				isMobile={this.isMobile.value}
 				siderVisible={false}
+				footerVisible={false}
 				v-slots={{
 					header: () => <BasicHearder />,
 					tab: () => <BasicTab></BasicTab>,

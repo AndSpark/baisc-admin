@@ -8,7 +8,7 @@ import { injectService, Mut } from 'vue3-oop'
 export default class LoginSerivce extends FormService<LoginForm> {
 	private authService = injectService(AuthService)!
 
-	@Mut() form: LoginForm = new LoginForm()
+	@Mut() form = new LoginForm()
 
 	async login() {
 		await this.validate()

@@ -8,5 +8,6 @@ declare module '*.vue' {
 
 interface ImportMetaEnv {
 	readonly VITE_APP_TITLE: string
+	readonly VITE_AMAP_KEY: string
 	// 更多环境变量...
 }

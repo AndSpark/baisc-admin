@@ -10,6 +10,7 @@ import ThemeService from './core/theme/theme.service'
 import TabService from './core/router/tab.service'
 import './utils/decorators/vue3-oop/index'
 import WebSocketService from './core/websocket/websocket.service'
+import AMapService from './modules/amap/amap.service'
 
 @Component({
 	providers: [
@@ -20,6 +21,7 @@ import WebSocketService from './core/websocket/websocket.service'
 		WebSocketService,
 		ThemeService,
 		TabService,
+		AMapService,
 	],
 })
 export default class App extends VueComponent {

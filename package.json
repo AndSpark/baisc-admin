@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@abraham/reflection": "^0.10.0",
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@stomp/rx-stomp": "^2.0.0",
     "@stomp/stompjs": "^7.0.0",
     "@vueuse/core": "^9.13.0",
@@ -29,6 +30,7 @@
     "vue3-oop": "^1.0.2"
   },
   "devDependencies": {
+    "@amap/amap-jsapi-types": "^0.0.13",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
     "@types/uuid": "^9.0.1",

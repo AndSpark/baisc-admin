@@ -5,6 +5,7 @@ import ThemeMode from './components/themeMode'
 import Fullscreen from './components/fullScreen'
 import HeaderMenu from './components/headerMenu'
 import Notification from './components/notification'
+import UserAvatar from './components/userAvatar'
 
 export default class BasicHearder extends VueComponent {
 	render() {
@@ -16,6 +17,7 @@ export default class BasicHearder extends VueComponent {
 				<Fullscreen />
 				<ThemeMode />
 				<Notification></Notification>
+				<UserAvatar></UserAvatar>
 			</DarkModeContainer>
 		)
 	}

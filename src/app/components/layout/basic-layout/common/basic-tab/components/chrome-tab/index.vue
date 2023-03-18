@@ -160,7 +160,6 @@ const style = c(
     }),
     c('&__icon', {
       position: 'absolute',
-
       right: '16px',
     }),
     c(

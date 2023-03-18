@@ -1,4 +1,5 @@
 import DarkModeContainer from '@/app/components/common/darkModeContainer'
+import SvgIcon from '@/app/components/common/svgIcon'
 import TabService from '@/app/core/router/tab.service'
 import { mixColor } from '@/app/core/theme/color'
 import ThemeService from '@/app/core/theme/theme.service'
@@ -22,7 +23,7 @@ export default class BasicTab extends VueComponent {
 
 	render() {
 		return (
-			<DarkModeContainer class='shadow-sm relative top-2'>
+			<DarkModeContainer class='shadow-sm relative pt-2 h-full'>
 				<div class='flex '>
 					<div class=' flex pr-5' style='width:calc(100% - 34px)'>
 						<TransitionGroup name='tab'>
@@ -35,8 +36,9 @@ export default class BasicTab extends VueComponent {
 									onClick={() => this.tabService.handleTabClick(v.fullPath)}
 									isActive={v.fullPath === this.tabService.activeTabPath}
 								>
-									<div class='select-none'>
-										<i class={['iconfont mr-2 ', v.meta.icon]}></i>
+									<div class='select-none flex-y-center gap-2 '>
+										{v.meta.svgIcon && <SvgIcon class='w-16px ' icon={v.meta.svgIcon}></SvgIcon>}
+										{v.meta.icon && <i class={['iconfont   ', v.meta.icon]}></i>}
 										{v.meta.title}
 									</div>
 								</ChromeTab>
@@ -46,7 +48,7 @@ export default class BasicTab extends VueComponent {
 					<ReloadButton></ReloadButton>
 				</div>
 
-				<div class='h-0.5 ' style={{ background: this.color }}></div>
+				<div class='h-0.5  ' style={{ background: this.color }}></div>
 			</DarkModeContainer>
 		)
 	}

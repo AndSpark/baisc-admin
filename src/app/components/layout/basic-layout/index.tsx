@@ -8,6 +8,7 @@ import ThemeService from '@/app/core/theme/theme.service'
 import BasicSider from './common/basic-sider'
 import BasicTab from './common/basic-tab'
 import { RouterService } from '@/app/core/router/router.service'
+import DarkModeContainer from '../../common/darkModeContainer'
 
 @Component()
 export default class BasicLayout extends VueComponent {
@@ -34,11 +35,7 @@ export default class BasicLayout extends VueComponent {
 					sider: () => <BasicSider></BasicSider>,
 					footer: () => <div></div>,
 					default: () => (
-						<div
-							class={[
-								'p-4 h-full bg-[#f6f9f8] dark:bg-[#101014] transition duration-300 ease-in-out',
-							]}
-						>
+						<DarkModeContainer class='h-full'>
 							<RouterView
 								v-slots={{
 									default: (e: any) => {
@@ -59,7 +56,7 @@ export default class BasicLayout extends VueComponent {
 									},
 								}}
 							></RouterView>
-						</div>
+						</DarkModeContainer>
 					),
 				}}
 			></AdminLayout>

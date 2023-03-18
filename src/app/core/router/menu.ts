@@ -1,3 +1,4 @@
+import SvgIcon from '@/app/components/common/svgIcon'
 import { MenuOption } from 'naive-ui'
 import { h, VNodeChild } from 'vue'
 import { RouteMeta, RouteRecordRaw, RouterLink } from 'vue-router'
@@ -22,6 +23,11 @@ export function transformRoutesToMenu(routes: readonly RouteRecordRaw[]) {
 			routeChildren = transformRoutesToMenu(route.children)
 		}
 
+		let icon
+
+		if (meta.icon) icon = () => h('i', { class: 'iconfont ' + meta.icon })
+		if (meta.svgIcon) icon = () => h(SvgIcon, { icon: meta.svgIcon, style: 'width:16px' })
+
 		const MenuItem: RouteMenu = {
 			key: name as string,
 			label: component
@@ -29,7 +35,7 @@ export function transformRoutesToMenu(routes: readonly RouteRecordRaw[]) {
 				: meta.title!,
 			routeName: name as string,
 			routePath: path,
-			icon: meta?.icon ? () => h('i', { class: 'iconfont ' + meta.icon }) : undefined,
+			icon,
 			routeMeta: meta,
 		}
 		if (routeChildren.length) MenuItem.children = routeChildren

@@ -2,7 +2,7 @@ import { setProps } from '@/app/utils/helper/oop'
 import { VueComponent } from 'vue3-oop'
 import { h } from 'vue'
 
-class SvgIconProps {
+export class SvgIconProps {
 	icon:
 		| 'vite'
 		| 'refresh'
@@ -11,6 +11,9 @@ class SvgIconProps {
 		| 'sun'
 		| 'moon'
 		| 'notification'
+		| 'map'
+		| 'avatar'
+		| 'logout'
 		| undefined = undefined
 }
 
@@ -26,7 +29,7 @@ export default class SvgIcon extends VueComponent<SvgIconProps> {
 		for (const key in svgs) {
 			if (key.includes(this.$props.icon!)) {
 				return h(svgs[key], {
-					class: 'dark:fill-white dark:fill-opacity-82  ',
+					class: 'dark:fill-white dark:fill-opacity-82 w-4 ',
 				})
 			}
 		}

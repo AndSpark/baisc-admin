@@ -11,6 +11,7 @@ import TabService from './core/router/tab.service'
 import './utils/decorators/vue3-oop/index'
 import WebSocketService from './core/websocket/websocket.service'
 import AMapService from './modules/amap/amap.service'
+import DarkModeContainer from './components/common/darkModeContainer'
 
 @Component({
 	providers: [

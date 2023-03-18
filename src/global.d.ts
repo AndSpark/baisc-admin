@@ -1,10 +1,12 @@
 import 'vue-router'
+import { SvgIconProps } from './app/components/common/svgIcon'
 export type RouterLayout = 'basic' | 'blank'
 
 declare module 'vue-router' {
 	interface RouteMeta {
 		title?: string
 		icon?: string
+		svgIcon?: SvgIconProps['icon']
 		layout?: RouterLayout
 		hide?: boolean
 		multiple?: boolean

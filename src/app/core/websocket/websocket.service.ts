@@ -62,9 +62,9 @@ export default class WebSocketService extends VueService {
 	unsubscribe<T extends EnumTopic>(destination: T, handler: TopicHandler<T>) {
 		const index = this.topicHandlers[destination]?.findIndex(v => v === handler)
 		if (index !== undefined && index > -1) {
-			this.topicHandlers[destination]!.splice(index, 1)
+			this.topicHandlers[destination]?.splice(index, 1)
 			if (this.topicHandlers[destination]!.length === 0) {
-				this.topicSubscrition[destination]!.unsubscribe()
+				this.topicSubscrition[destination]?.unsubscribe()
 				this.topicSubscrition[destination] = undefined
 			}
 		}

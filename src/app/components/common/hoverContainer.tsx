@@ -54,7 +54,7 @@ export default class HoverContainer extends VueComponent<HoverContainerProps> {
 				</NTooltip>
 			)
 		return (
-			<div class={['flex-center cursor-pointer dark:hover:bg-[#333]', this.contentClassName]}>
+			<div class={['flex-center cursor-pointer px-2 dark:hover:bg-[#333]', this.contentClassName]}>
 				{this.$slots.default?.()}
 			</div>
 		)

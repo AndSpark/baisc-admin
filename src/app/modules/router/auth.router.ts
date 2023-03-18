@@ -14,6 +14,7 @@ export default class AuthRouterService extends VueService {
 	routerService = injectService(RouterService)!
 
 	init() {
+		this.authService.getMe()
 		this.subscribe()
 		this.beforeEnter()
 	}

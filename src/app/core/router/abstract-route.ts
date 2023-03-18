@@ -5,12 +5,13 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 	name = Object.getPrototypeOf(this).constructor.name
 	meta: RouteMeta = {}
 
-	layout: RouterLayout = 'basic'
+	layout: RouteMeta['layout'] = 'basic'
 	/* 菜单排序 */
 	sort: number = 0
-	title?: string
-	icon?: string
-	hide?: boolean
+	title: RouteMeta['title']
+	icon: RouteMeta['icon']
+	svgIcon?: RouteMeta['svgIcon']
+	hide: RouteMeta['hide']
 
 	initRoute() {
 		Object.assign(this.meta, {
@@ -19,6 +20,7 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 			title: this.title || this.meta.title,
 			hide: this.hide || this.meta.hide,
 			sort: this.sort || this.meta.sort,
+			svgIcon: this.svgIcon || this.meta.svgIcon,
 		})
 	}
 

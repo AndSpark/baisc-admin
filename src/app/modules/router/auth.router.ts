@@ -2,7 +2,8 @@ import AuthService from '@/app/core/authentication/auth.service'
 import { RouterService } from '@/app/core/router/router.service'
 import IndexRoute from '@/app/pages/index/index.route'
 import LoginRoute from '@/app/pages/login/index.route'
-import { nMessage } from '@/app/utils/naive'
+import { nNotification } from '@/app/utils/naive'
+import { toTimeCN } from '@/app/utils/time'
 import { Injectable } from 'injection-js'
 import { Subscription } from 'rxjs'
 import { Hook, injectService, VueService } from 'vue3-oop'
@@ -23,7 +24,11 @@ export default class AuthRouterService extends VueService {
 		this.authChangeSubcrition = this.authService.change$.subscribe(user => {
 			if (user) {
 				this.routerService.router.push({ name: IndexRoute.name })
-				nMessage()?.success('登陆成功')
+				nNotification()?.success({
+					title: '欢迎回来',
+					description: toTimeCN(),
+					duration: 3000,
+				})
 			} else {
 				this.routerService.router.push({ name: LoginRoute.name })
 			}

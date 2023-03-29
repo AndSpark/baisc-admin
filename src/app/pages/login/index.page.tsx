@@ -18,7 +18,11 @@ export default class IndexPage extends VueComponent {
 							<NInput v-model:value={this.loginService.form.username}></NInput>
 						</NFormItem>
 						<NFormItem label='密码' path='password'>
-							<NInput v-model:value={this.loginService.form.password}></NInput>
+							<NInput
+								type={'password'}
+								showPasswordOn={'click'}
+								v-model:value={this.loginService.form.password}
+							></NInput>
 						</NFormItem>
 						<NButton onClick={() => this.loginService.login()}>登陆</NButton>
 					</>

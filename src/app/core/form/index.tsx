@@ -14,7 +14,7 @@ export abstract class FormService<T extends Validator> extends VueService {
 		watch(
 			() => this.innerRules,
 			val => {
-				this.rules = JSON.parse(JSON.stringify(this.innerRules))
+				this.rules = this.innerRules
 			},
 			{ deep: true }
 		)

@@ -30,7 +30,7 @@ export default class UserAvatar extends VueComponent {
 		return (
 			<NDropdown options={this.options} onSelect={e => this.handleOptionSelect(e)}>
 				<HoverContainer contentClass='h-full flex gap-2'>
-					<div class='border-2 rounded-full w-8 h-8 flex-center  '>
+					<div class='border-2 rounded-full w-7 h-7 flex-center  '>
 						{this.authService.user?.profile.realName.slice(0, 1)}
 					</div>
 					<span>{this.authService.user?.profile.realName}</span>

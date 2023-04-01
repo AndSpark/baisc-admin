@@ -1,7 +1,7 @@
 import HoverContainer from '@/app/components/common/hoverContainer'
 import SvgIcon from '@/app/components/common/svgIcon'
 import { RouterService } from '@/app/core/router/router.service'
-import { Loading } from '@/app/utils/decorators/common/loading'
+import { Loading } from '@/app/utils/decorators/common/Loading'
 import { sleep } from '@/app/utils/helper'
 import { Component, injectService, Mut, VueComponent } from 'vue3-oop'
 

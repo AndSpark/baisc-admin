@@ -1,4 +1,4 @@
-import { RequiredHandler } from './required'
-import { TriggerHandler } from './trigger'
+import { RequiredHandler } from './Required'
+import { TriggerHandler } from './Trigger'
 
 export const handlerList = [TriggerHandler, RequiredHandler]

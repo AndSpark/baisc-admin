@@ -1,4 +1,4 @@
-export function decoratorMethod(method: any) {
+export function createMethodDecorator(method: any) {
 	return function (target: any, key: string, descriptor: PropertyDescriptor) {
 		const fn = descriptor.value
 		descriptor.value = function (...args: any) {

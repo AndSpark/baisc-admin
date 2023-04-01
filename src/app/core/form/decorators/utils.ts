@@ -1,4 +1,4 @@
-export interface MetadataStore<T extends any[]> {
+interface MetadataStore<T extends any[]> {
 	key: string
 	options: T[]
 	desc?: PropertyDescriptor | null

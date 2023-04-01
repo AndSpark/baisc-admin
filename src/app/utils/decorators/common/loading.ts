@@ -1,11 +1,12 @@
-import { decoratorMethod } from '../help'
+import { createMethodDecorator } from '../help'
 
 export function Loading(key: string = 'loading') {
-	return decoratorMethod(async (fn: () => any, target: any) => {
+	return createMethodDecorator(async (fn: () => any, target: any) => {
 		eval(`target.${key} = true`)
 		try {
-			await fn()
+			const res = await fn()
 			eval(`target.${key} = false`)
+			return res
 		} catch (error) {
 			eval(`target.${key} = false`)
 			return Promise.reject(error)

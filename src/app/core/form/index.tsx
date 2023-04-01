@@ -1,54 +1,37 @@
-import { FormProps, NForm } from 'naive-ui'
+import { FormProps, NForm, NSpin } from 'naive-ui'
 import { Computed, Link, Mut, VueService } from 'vue3-oop'
 import { h, watch } from 'vue'
 import Validator from './validator'
 import type { FormInst } from 'naive-ui/es/form/src/interface'
+import { Loading } from '@/app/utils/decorators/common/Loading'
+import { isArray } from 'class-validator'
 
 export abstract class FormService<T extends Validator> extends VueService {
 	@Link() nForm!: FormInst
 	@Mut() abstract form: T
+	@Mut() loading = false
 	nFormProps: FormProps = {}
 
-	constructor() {
-		super()
-		watch(
-			() => this.innerRules,
-			val => {
-				this.rules = this.innerRules
-				console.log(this.rules)
-			},
-			{ deep: true }
-		)
-	}
-
-	@Mut() rules: any = {}
-
-	// NForm的rules不能直接用innerRules，没有效果
 	@Computed()
 	private get innerRules() {
 		return this.form?.createRules()
 	}
 
-	validate() {
-		return this.nForm.validate()
+	async validate() {
+		return await this.nForm.validate()
 	}
 
 	restoreValidation() {
 		this.nForm.restoreValidation()
 	}
 
-	NForm(a: any) {
-		return h(
-			NForm,
-			Object.assign(
-				{
-					ref: 'nForm',
-					model: this.form,
-					rules: this.rules,
-				},
-				this.nFormProps
-			),
-			() => a
+	NForm(el: JSX.Element) {
+		return (
+			<NSpin show={this.loading}>
+				<NForm ref='nForm' model={this.form} rules={this.innerRules} {...this.nFormProps}>
+					{el}
+				</NForm>
+			</NSpin>
 		)
 	}
 }

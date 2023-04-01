@@ -19,7 +19,7 @@ export default defineConfig({
 		host: true,
 		proxy: {
 			'/api': {
-				target: 'https://govfun.com:10003/api',
+				target: 'https://nbzf.lujingkeji.com/api',
 				changeOrigin: true,
 				secure: false,
 				ws: true,

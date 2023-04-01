@@ -14,7 +14,7 @@ export default abstract class Validator {
 			const { validate, defaultMessage } = v.constraintCls.prototype
 			const key = v.propertyName
 			if (!validators[key]) validators[key] = []
-			const validator = (rule: any, value: any) => {
+			const validator = async (rule: any, value: any) => {
 				const validationArguments: ValidationArguments = {
 					value,
 					property: v.propertyName,
@@ -22,7 +22,7 @@ export default abstract class Validator {
 					constraints: v.constraints,
 					object: this,
 				}
-				const isTrue = validate(value, validationArguments)
+				const isTrue = await validate(value, validationArguments)
 				const msg = ValidationUtils.replaceMessageSpecialTokens(
 					defaultMessage(validationArguments),
 					validationArguments
@@ -37,11 +37,16 @@ export default abstract class Validator {
 		})
 
 		for (const key in rules) {
-			rules[key].validator = (rule: any, value: any) => {
+			rules[key].validator = async (rule: any, value: any, callBack) => {
 				for (const validator of validators[key]) {
-					const res = validator(rule, value)
-					if (res !== true) return res
+					try {
+						const res = await validator(rule, value)
+						if (res !== true) return callBack(res)
+					} catch (error) {
+						return callBack(error as any)
+					}
 				}
+				callBack()
 			}
 		}
 

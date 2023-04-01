@@ -15,6 +15,7 @@ export abstract class FormService<T extends Validator> extends VueService {
 			() => this.innerRules,
 			val => {
 				this.rules = this.innerRules
+				console.log(this.rules)
 			},
 			{ deep: true }
 		)
@@ -25,7 +26,7 @@ export abstract class FormService<T extends Validator> extends VueService {
 	// NForm的rules不能直接用innerRules，没有效果
 	@Computed()
 	private get innerRules() {
-		return this.form?.createRules(this)
+		return this.form?.createRules()
 	}
 
 	validate() {

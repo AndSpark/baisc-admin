@@ -1,5 +1,11 @@
 import { resolveInstances } from '@/app/utils/injection'
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, {
+	AxiosError,
+	AxiosInstance,
+	AxiosRequestConfig,
+	AxiosResponse,
+	isAxiosError,
+} from 'axios'
 import { Injectable } from 'injection-js'
 import { setupApi } from 'szpt-driver-api'
 import httpInterceptorProviders from './interceptor'
@@ -46,15 +52,18 @@ export class HttpService {
 				})
 				.catch(async error => {
 					let err = error
-					const setError = (e: AxiosError) => (err = e)
-					try {
-						for (const item of rejectList) {
-							await item([err, setError])
+					if (isAxiosError(error)) {
+						try {
+							for (const item of rejectList) {
+								await item([err])
+							}
+						} catch (error) {
+							console.log(error)
 						}
-					} catch (error) {
-						console.log(error)
+						reject(error.response?.data || error.message)
+					} else {
+						reject(err)
 					}
-					reject(err)
 				})
 		})
 	}

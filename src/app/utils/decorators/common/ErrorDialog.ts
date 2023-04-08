@@ -3,7 +3,7 @@ import { toErrorMessage } from '../../common/error'
 import { nDialog } from '../../naive'
 import { createMethodDecorator } from '../help'
 
-class DialogArguments {
+class ErrorDialogArguments {
 	title?: string = '错误提示'
 	content?: string = '操作出错！'
 	showRetry?: boolean = false
@@ -11,12 +11,12 @@ class DialogArguments {
 	positiveText?: string = '重试'
 }
 
-export function ErrorDialog(args: DialogArguments = new DialogArguments()) {
+export function ErrorDialog(args: ErrorDialogArguments = new ErrorDialogArguments()) {
 	const method = async (fn: () => any) => {
 		try {
 			return await fn()
 		} catch (error) {
-			const innerArgs = Object.assign(new DialogArguments(), args)
+			const innerArgs = Object.assign(new ErrorDialogArguments(), args)
 			const options: DialogOptions = {
 				title: innerArgs.title,
 				content: innerArgs.content + toErrorMessage(error),

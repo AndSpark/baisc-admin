@@ -26,7 +26,8 @@ export function transformRoutesToMenu(routes: readonly RouteRecordRaw[]) {
 		let icon
 
 		if (meta.icon) icon = () => h('i', { class: 'iconfont ' + meta.icon })
-		if (meta.svgIcon) icon = () => h(SvgIcon, { icon: meta.svgIcon, style: 'width:16px' })
+		if (meta.svgIcon)
+			icon = () => h(SvgIcon, { icon: meta.svgIcon, style: 'width:16px;height:24px' })
 
 		const MenuItem: RouteMenu = {
 			key: name as string,

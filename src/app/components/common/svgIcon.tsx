@@ -14,6 +14,9 @@ export class SvgIconProps {
 		| 'map'
 		| 'avatar'
 		| 'logout'
+		| 'pageNotFound'
+		| 'app'
+		| 'mail'
 		| undefined = undefined
 }
 

@@ -1,15 +1,15 @@
-import { FormProps, NForm, NSpin } from 'naive-ui'
+import { FormProps, NForm, NFormItem, NSpin } from 'naive-ui'
 import { Computed, Link, Mut, VueService } from 'vue3-oop'
-import { h, watch } from 'vue'
 import Validator from './validator'
 import type { FormInst } from 'naive-ui/es/form/src/interface'
-import { Loading } from '@/app/utils/decorators/common/Loading'
-import { isArray } from 'class-validator'
+import { FormItemOption } from './type'
+import If from '@/app/components/common/if'
 
 export abstract class FormService<T extends Validator> extends VueService {
 	@Link() nForm!: FormInst
 	@Mut() abstract form: T
 	@Mut() loading = false
+	@Mut() defaultForm: FormItemOption[] = []
 	nFormProps: FormProps = {}
 
 	@Computed()
@@ -25,11 +25,19 @@ export abstract class FormService<T extends Validator> extends VueService {
 		this.nForm.restoreValidation()
 	}
 
-	NForm(el: JSX.Element) {
+	defaultFormEl() {
+		return this.defaultForm.map(v => (
+			<NFormItem {...v}>
+				<v.component {...v.componentProps}>{v.componentSlot?.()}</v.component>
+			</NFormItem>
+		))
+	}
+
+	NForm(el?: JSX.Element) {
 		return (
 			<NSpin show={this.loading}>
 				<NForm ref='nForm' model={this.form} rules={this.innerRules} {...this.nFormProps}>
-					{el}
+					{el ? el : this.defaultFormEl()}
 				</NForm>
 			</NSpin>
 		)

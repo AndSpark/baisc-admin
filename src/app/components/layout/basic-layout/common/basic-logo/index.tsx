@@ -26,7 +26,7 @@ export default class BasicLogo extends VueComponent<BasicLogoProps> {
 				<SvgIcon icon={'vite'} class=' w-24px h-24px'></SvgIcon>
 				<h2
 					v-show={this.$props.showTitle}
-					class='text-lg font-bold transition duration-300 ease-in-out'
+					class='text-lg font-bold transition duration-300 ease-in-out truncate'
 				>
 					{APP_CONFIGS.ADMIN_TITLE}
 				</h2>

@@ -1,5 +1,6 @@
 import AuthService from '@/app/core/authentication/auth.service'
 import { RouterService } from '@/app/core/router/router.service'
+import NotFoundRoute from '@/app/pages/404/404.route'
 import IndexRoute from '@/app/pages/index/index.route'
 import LoginRoute from '@/app/pages/login/index.route'
 import { nNotification } from '@/app/utils/naive'
@@ -42,6 +43,12 @@ export default class AuthRouterService extends VueService {
 
 	beforeEnter() {
 		this.routerService.router.beforeEach((to, from) => {
+			if (!this.routerService.router.hasRoute(to.name!)) {
+				return {
+					name: NotFoundRoute.name,
+				}
+			}
+
 			if (!this.authService.hasLogin && to.name !== LoginRoute.name) {
 				return {
 					name: LoginRoute.name,

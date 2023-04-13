@@ -2,10 +2,21 @@ import { injectService, VueService } from 'vue3-oop'
 import AuthService from '@/app/core/authentication/auth.service'
 import { RxStomp, RxStompState } from '@stomp/rx-stomp'
 import { Injectable } from 'injection-js'
-import { first, from, interval, Subscription, timeout, timer } from 'rxjs'
+import {
+	BehaviorSubject,
+	catchError,
+	first,
+	from,
+	interval,
+	Subject,
+	Subscription,
+	tap,
+	timeout,
+	timer,
+} from 'rxjs'
 import { v4 } from 'uuid'
-import { TopicHandler, TopicHandlers } from './type'
-import { EnumPublishDestination, EnumTopic } from './enum'
+import { TopicHandler, TopicHandlers, WebsocketConnectionState } from './type'
+import { EnumPublishDestination, EnumTopic, InformWebsocketText, InformWebsocketType } from './enum'
 import { isDefine } from '@/app/utils/common/typeof'
 
 @Injectable()
@@ -17,7 +28,14 @@ export default class WebSocketService extends VueService {
 	}/api/auth/ws/endpoint`
 	private topicHandlers: TopicHandlers = {}
 	private topicSubscrition: Partial<Record<EnumTopic, Subscription>> = {}
-	private heartbeatSubscrition: Subscription | null = null
+	private timeout = 5000
+
+	private disconnect$ = new Subject()
+
+	public readonly connectionState$ = new BehaviorSubject<WebsocketConnectionState>({
+		type: 'none',
+		message: '未连接',
+	})
 
 	constructor() {
 		super()
@@ -26,7 +44,7 @@ export default class WebSocketService extends VueService {
 
 		this.authService.change$.subscribe(user => {
 			if (!isDefine(user)) {
-				this.close()
+				this.disconnect()
 			} else {
 				this.connect()
 			}
@@ -37,10 +55,13 @@ export default class WebSocketService extends VueService {
 		this.configure()
 		this.rxStomp.activate()
 		this.heartbeatSubscribe()
+		this.stateSubscribe()
 	}
 
-	close() {
+	disconnect() {
 		this.rxStomp.deactivate()
+		this.disconnect$.next(true)
+		this.disconnect$.unsubscribe()
 		this.unsubscribeAll()
 	}
 
@@ -75,7 +96,6 @@ export default class WebSocketService extends VueService {
 			this.topicSubscrition[destination as EnumTopic]!.unsubscribe()
 			this.topicSubscrition[destination as EnumTopic] = undefined
 		}
-		this.heartbeatSubscrition?.unsubscribe()
 	}
 
 	publish(destination: EnumPublishDestination, body: string) {
@@ -87,11 +107,40 @@ export default class WebSocketService extends VueService {
 			destination,
 			body,
 		})
-		return from(this.rxStomp.asyncReceipt('receiptId')).pipe(
+		return from(this.rxStomp.asyncReceipt(receiptId)).pipe(
 			timeout({
-				first: 15000,
+				first: this.timeout,
 			})
 		)
+	}
+
+	private stateSubscribe() {
+		const stompErrorsSub = this.rxStomp.stompErrors$.subscribe(val => {
+			this.connectionState$.next({
+				type: InformWebsocketType['3'],
+				message: InformWebsocketText['3'] + val.body,
+			})
+		})
+		const webSocketErrorsSub = this.rxStomp.webSocketErrors$.subscribe(val => {
+			this.connectionState$.next({
+				type: InformWebsocketType['3'],
+				message: InformWebsocketText['3'] + val.type,
+			})
+		})
+		const connectionStateSub = this.rxStomp.connectionState$.subscribe(val => {
+			this.connectionState$.next({
+				type: InformWebsocketType[val],
+				message: InformWebsocketText[val],
+			})
+			if (val !== 1) {
+				this.rxStomp.activate()
+			}
+		})
+		this.disconnect$.subscribe(val => {
+			stompErrorsSub.unsubscribe()
+			webSocketErrorsSub.unsubscribe()
+			connectionStateSub.unsubscribe()
+		})
 	}
 
 	private configure() {
@@ -102,13 +151,21 @@ export default class WebSocketService extends VueService {
 			},
 			reconnectDelay: 5000,
 			heartbeatIncoming: 0, // server to client
-			heartbeatOutgoing: 15000,
+			heartbeatOutgoing: this.timeout,
 		})
 	}
 
 	private heartbeatSubscribe() {
-		this.heartbeatSubscrition = interval(15000).subscribe(() =>
-			this.publish(EnumPublishDestination.HEARTBEAT, Date.now().toString())
+		const heartbeatSubscrition = interval(this.timeout).subscribe(() =>
+			this.publish(EnumPublishDestination.HEARTBEAT, Date.now().toString()).subscribe({
+				complete: () => {},
+				error: e => {
+					this.rxStomp.deactivate({ force: true })
+				},
+			})
 		)
+		this.disconnect$.subscribe(val => {
+			heartbeatSubscrition.unsubscribe()
+		})
 	}
 }

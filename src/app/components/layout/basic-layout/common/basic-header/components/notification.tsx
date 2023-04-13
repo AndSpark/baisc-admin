@@ -4,7 +4,7 @@ import { EnumTopic } from '@/app/core/websocket/enum'
 import { TopicResponses } from '@/app/core/websocket/type'
 import { WsSubscribe } from '@/app/utils/decorators/vue3-oop/websocket'
 import { NPopover, NTabPane, NTabs } from 'naive-ui'
-import { Component, Hook, injectService, Mut, VueComponent } from 'vue3-oop'
+import { Component, Mut, VueComponent } from 'vue3-oop'
 
 @Component()
 export default class Notification extends VueComponent {

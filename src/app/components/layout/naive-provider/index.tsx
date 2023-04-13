@@ -10,6 +10,7 @@ import {
 	useNotification,
 } from 'naive-ui'
 import { VueComponent } from 'vue3-oop'
+import GlobalInform from '../../common/global-inform'
 
 class NaiveProviderRegister extends VueComponent {
 	constructor() {
@@ -35,7 +36,7 @@ export default class NaiveProvider extends VueComponent {
 				<NDialogProvider>
 					<NNotificationProvider>
 						<NMessageProvider>
-							{this.$slots.default!()}
+							<GlobalInform>{this.$slots.default!()}</GlobalInform>
 							<NaiveProviderRegister></NaiveProviderRegister>
 						</NMessageProvider>
 					</NNotificationProvider>

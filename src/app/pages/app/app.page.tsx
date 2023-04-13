@@ -10,7 +10,7 @@ export default class AppPage extends VueComponent {
 
 	render() {
 		return (
-			<div class='w-full flex flex-y-center flex-col'>
+			<div class='w-full flex flex-y-center flex-col pt-4'>
 				<AppGroup class='max-w-5xl' title='消息'></AppGroup>
 			</div>
 		)

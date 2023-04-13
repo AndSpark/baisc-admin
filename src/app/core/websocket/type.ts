@@ -18,3 +18,9 @@ export type BpmnTopicResponse = {
 	action: string
 	data: any
 }
+
+export type WebsocketConnectionState = {
+	type: string
+	message: string
+	code?: string
+}

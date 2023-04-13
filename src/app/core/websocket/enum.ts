@@ -8,3 +8,18 @@ export enum EnumTopic {
 export enum EnumPublishDestination {
 	HEARTBEAT = 'hearbeat',
 }
+
+import { RxStompState } from '@stomp/rx-stomp'
+
+export const InformWebsocketText = {
+	[RxStompState.CONNECTING]: '与服务器断开连接，正在连接中',
+	[RxStompState.CLOSED]: '与服务器断开连接',
+	[RxStompState.OPEN]: '已经连接到服务器',
+	[RxStompState.CLOSING]: '与服务器断开连接',
+}
+export const InformWebsocketType = {
+	[RxStompState.CONNECTING]: 'error',
+	[RxStompState.CLOSED]: 'error',
+	[RxStompState.OPEN]: 'success',
+	[RxStompState.CLOSING]: 'error',
+}

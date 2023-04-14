@@ -32,10 +32,7 @@ export default class WebSocketService extends VueService {
 
 	private disconnect$ = new Subject()
 
-	public readonly connectionState$ = new BehaviorSubject<WebsocketConnectionState>({
-		type: 'none',
-		message: '未连接',
-	})
+	public readonly connectionState$ = new Subject<WebsocketConnectionState>()
 
 	constructor() {
 		super()

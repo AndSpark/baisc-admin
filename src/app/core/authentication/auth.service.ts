@@ -12,6 +12,11 @@ export default class AuthService extends VueService {
 
 	change$ = new Subject<User | null>()
 
+	constructor() {
+		super()
+		if (!this.checkTokenExpire()) this.clear()
+	}
+
 	get hasLogin() {
 		return this.checkTokenExpire()
 	}

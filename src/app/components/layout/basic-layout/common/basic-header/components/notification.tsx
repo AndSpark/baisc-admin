@@ -1,8 +1,6 @@
 import HoverContainer from '@/app/components/common/hoverContainer'
 import SvgIcon from '@/app/components/common/svgIcon'
-import { EnumTopic } from '@/app/core/websocket/enum'
-import { TopicResponses } from '@/app/core/websocket/type'
-import { WsSubscribe } from '@/app/utils/decorators/vue3-oop/websocket'
+import { WsSubscribe, EnumTopic, TopicResponses } from 'szjw-ws'
 import { NPopover, NTabPane, NTabs } from 'naive-ui'
 import { Component, Mut, VueComponent } from 'vue3-oop'
 

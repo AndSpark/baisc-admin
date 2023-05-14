@@ -1,8 +1,7 @@
 import { Mut, VueComponent } from 'vue3-oop'
 import './index.css'
 import { Injectable, SkipSelf } from 'injection-js'
-import WebSocketService from '@/app/core/websocket/websocket.service'
-
+import { WebSocketService } from 'szjw-ws'
 @Injectable()
 export default class GlobalInform extends VueComponent {
 	constructor(@SkipSelf() private wsService: WebSocketService) {

@@ -22,13 +22,7 @@ export class RouterService extends VueService {
 		const routes = createRoutes()
 		this.router = createRouter({
 			history: this.history,
-			routes: [
-				{
-					path: '/',
-					children: routes,
-					component: () => import('@/app/components/layout/index'),
-				},
-			],
+			routes,
 		})
 		this.app.use(this.router)
 		this.menu = transformRoutesToMenu(routes)

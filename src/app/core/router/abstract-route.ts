@@ -12,6 +12,7 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 	icon: RouteMeta['icon']
 	svgIcon?: RouteMeta['svgIcon']
 	hide: RouteMeta['hide']
+	needToken = true
 
 	initRoute() {
 		Object.assign(this.meta, {
@@ -21,6 +22,7 @@ export default abstract class AbstractRoute implements Partial<RouteRecordNormal
 			hide: this.hide || this.meta.hide,
 			sort: this.sort || this.meta.sort,
 			svgIcon: this.svgIcon || this.meta.svgIcon,
+			needToken: this.needToken || this.meta.needToken,
 		})
 	}
 

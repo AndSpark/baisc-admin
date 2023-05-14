@@ -11,6 +11,7 @@ declare module 'vue-router' {
 		hide?: boolean
 		multiple?: boolean
 		index?: number
+		needToken?: boolean
 	}
 }
 

@@ -9,9 +9,10 @@ import { RouterView } from 'vue-router'
 import ThemeService from './core/theme/theme.service'
 import TabService from './core/router/tab.service'
 import './utils/decorators/vue3-oop/index'
-import WebSocketService from './core/websocket/websocket.service'
+import { WebSocketService } from 'szjw-ws'
 import AMapService from './modules/amap/amap.service'
 import DarkModeContainer from './components/common/darkModeContainer'
+import LayoutView from './components/layout'
 
 @Component({
 	providers: [
@@ -27,6 +28,7 @@ import DarkModeContainer from './components/common/darkModeContainer'
 })
 export default class App extends VueComponent {
 	themeService = injectService(ThemeService)!
+
 	render() {
 		return (
 			<NConfigProvider
@@ -35,7 +37,7 @@ export default class App extends VueComponent {
 				themeOverrides={this.themeService.naiveThemeOverrides}
 			>
 				<NaiveProvider>
-					<RouterView></RouterView>
+					<LayoutView />
 				</NaiveProvider>
 			</NConfigProvider>
 		)

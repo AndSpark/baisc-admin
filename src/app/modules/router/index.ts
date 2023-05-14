@@ -13,7 +13,9 @@ export default class RouterStart {
 		private otherRouterService: OtherRouterService
 	) {
 		this.routerService.initRoutes()
-		this.otherRouterService.init()
-		this.authRouterService.init()
+		setTimeout(() => {
+			this.otherRouterService.init()
+			this.authRouterService.init()
+		})
 	}
 }

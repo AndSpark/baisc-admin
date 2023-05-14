@@ -1,5 +1,5 @@
 import { NConfigProvider } from 'naive-ui'
-import { Component, injectService, VueComponent } from 'vue3-oop'
+import { Component, createCurrentInjector, injectService, VueComponent } from 'vue3-oop'
 import NaiveProvider from './components/layout/naive-provider'
 import AuthService from './core/authentication/auth.service'
 import { HttpService } from './core/http/http'

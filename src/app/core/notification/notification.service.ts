@@ -1,9 +1,8 @@
 import { speech } from '@/app/utils/common/speech'
-import { WsSubscribe } from '@/app/utils/decorators/vue3-oop/websocket'
 import { nNotification } from '@/app/utils/naive'
 import { VueService } from 'vue3-oop'
-import { EnumTopic } from '../websocket/enum'
 import type { NotificationOption } from './type'
+import { EnumTopic, WsSubscribe } from 'szjw-ws'
 
 export default class NotificationService extends VueService {
 	static Topic = EnumTopic.COMMON_BROADCAST
